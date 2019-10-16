@@ -6,12 +6,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/fatedier/frp/client/event"
-	"github.com/fatedier/frp/client/health"
-	"github.com/fatedier/frp/models/config"
-	"github.com/fatedier/frp/models/msg"
-	"github.com/fatedier/frp/utils/log"
-	frpNet "github.com/fatedier/frp/utils/net"
+	"github.com/fatedier/frp_0271/client/event"
+	"github.com/fatedier/frp_0271/client/health"
+	"github.com/fatedier/frp_0271/models/config"
+	"github.com/fatedier/frp_0271/models/msg"
+	"github.com/fatedier/frp_0271/utils/log"
+	frpNet "github.com/fatedier/frp_0271/utils/net"
 
 	"github.com/fatedier/golib/errors"
 )
