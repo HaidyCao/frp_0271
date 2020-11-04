@@ -21,12 +21,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fatedier/frp_0271/client/proxy"
-	"github.com/fatedier/frp_0271/g"
-	"github.com/fatedier/frp_0271/models/config"
-	"github.com/fatedier/frp_0271/models/msg"
-	"github.com/fatedier/frp_0271/utils/log"
-	frpNet "github.com/fatedier/frp_0271/utils/net"
+	"github.com/HaidyCao/frp_0271/client/proxy"
+	"github.com/HaidyCao/frp_0271/g"
+	"github.com/HaidyCao/frp_0271/models/config"
+	"github.com/HaidyCao/frp_0271/models/msg"
+	"github.com/HaidyCao/frp_0271/utils/log"
+	frpNet "github.com/HaidyCao/frp_0271/utils/net"
 
 	"github.com/fatedier/golib/control/shutdown"
 	"github.com/fatedier/golib/crypto"
@@ -71,6 +71,7 @@ type Control struct {
 	mu sync.RWMutex
 
 	log.Logger
+	ProxyFunc func(err error)
 }
 
 func NewControl(runId string, conn frpNet.Conn, session *fmux.Session, pxyCfgs map[string]config.ProxyConf, visitorCfgs map[string]config.VisitorConf) *Control {
@@ -139,6 +140,9 @@ func (ctl *Control) HandleNewProxyResp(inMsg *msg.NewProxyResp) {
 	err := ctl.pm.StartProxy(inMsg.ProxyName, inMsg.RemoteAddr, inMsg.Error)
 	if err != nil {
 		ctl.Warn("[%s] start error: %v", inMsg.ProxyName, err)
+		if ctl.ProxyFunc != nil {
+			ctl.ProxyFunc(err)
+		}
 	} else {
 		ctl.Info("[%s] start proxy success", inMsg.ProxyName)
 	}

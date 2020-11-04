@@ -18,8 +18,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fatedier/frp_0271/utils/log"
-	"github.com/fatedier/frp_0271/utils/metric"
+	"github.com/HaidyCao/frp_0271/utils/log"
+	"github.com/HaidyCao/frp_0271/utils/metric"
 )
 
 type internalCollector struct {

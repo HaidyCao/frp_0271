@@ -21,7 +21,7 @@ import (
 
 	ini "github.com/vaughan0/go-ini"
 
-	"github.com/fatedier/frp_0271/utils/util"
+	"github.com/HaidyCao/frp_0271/utils/util"
 )
 
 var (

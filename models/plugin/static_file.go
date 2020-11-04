@@ -18,7 +18,7 @@ import (
 	"io"
 	"net/http"
 
-	frpNet "github.com/fatedier/frp_0271/utils/net"
+	frpNet "github.com/HaidyCao/frp_0271/utils/net"
 
 	"github.com/gorilla/mux"
 )

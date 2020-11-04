@@ -15,8 +15,8 @@
 package main
 
 import (
-	_ "github.com/fatedier/frp_0271/assets/frpc/statik"
-	"github.com/fatedier/frp_0271/cmd/frpc/sub"
+	_ "github.com/HaidyCao/frp_0271/assets/frpc/statik"
+	"github.com/HaidyCao/frp_0271/cmd/frpc/sub"
 
 	"github.com/fatedier/golib/crypto"
 )
