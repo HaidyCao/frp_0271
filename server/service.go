@@ -26,6 +26,7 @@ import (
 	"math/big"
 	"net"
 	"net/http"
+	"reflect"
 	"strings"
 	"time"
 
@@ -110,8 +111,8 @@ func NewService() (svr *Service, err error) {
 			TcpPortManager: ports.NewPortManager("tcp", cfg.ProxyBindAddr, cfg.AllowPorts),
 			UdpPortManager: ports.NewPortManager("udp", cfg.ProxyBindAddr, cfg.AllowPorts),
 		},
-		Closed:   true,
-		closedCh: make(chan bool),
+		Closed:    true,
+		closedCh:  make(chan bool),
 		tlsConfig: generateTLSConfig(),
 	}
 
@@ -271,7 +272,14 @@ func (svr *Service) Run() {
 
 // Stop 停止服务
 func (svr *Service) Stop() error {
-	err := svr.muxer.Close()
+	var err error
+	value := reflect.ValueOf(svr.muxer)
+	lnValue := value.Elem().FieldByName("ln")
+	ln, ok := lnValue.Interface().(net.Listener)
+	if ok && ln != nil {
+		err = ln.Close()
+	}
+
 	if svr.listener != nil {
 		_ = svr.listener.Close()
 	}
